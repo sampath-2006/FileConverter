@@ -1,0 +1,57 @@
+# =========================
+# FileForge .gitignore
+# =========================
+
+# --- Secrets & Environment ---
+.env
+.env.local
+.env.*.local
+
+# --- Backend (Python/Flask) ---
+Backend/venv/
+Backend/__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# --- Backend Data & Uploads ---
+Backend/jobs.db
+Backend/uploads/*
+!Backend/uploads/.gitkeep
+Backend/converted/*
+!Backend/converted/.gitkeep
+
+# --- Frontend (Next.js/React) ---
+Frontend/node_modules/
+Frontend/.next/
+Frontend/out/
+Frontend/build/
+Frontend/.pnp
+Frontend/.pnp.js
+Frontend/coverage/
+Frontend/.vercel
+
+# --- OS & Editor ---
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo

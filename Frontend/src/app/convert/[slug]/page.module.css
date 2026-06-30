@@ -1,0 +1,126 @@
+/* ===== Hero ===== */
+.hero {
+  text-align: center;
+  margin-bottom: var(--space-2xl);
+  animation: fadeInUp 0.5s ease forwards;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 0.5rem 1.2rem;
+  background: var(--bg-card);
+  border: var(--glass-border);
+  border-radius: var(--radius-full);
+  margin-bottom: var(--space-xl);
+}
+
+.badgeFrom {
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--accent-purple);
+}
+
+.badgeArrow {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.badgeTo {
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--accent-cyan);
+}
+
+.headline {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 800;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: var(--space-md);
+  letter-spacing: -0.02em;
+}
+
+.subtext {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  max-width: 550px;
+  margin: 0 auto;
+}
+
+/* ===== Converter Card ===== */
+.converterCard {
+  max-width: 600px;
+  margin: 0 auto;
+  background: var(--bg-card);
+  backdrop-filter: blur(var(--glass-blur));
+  border: var(--glass-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-2xl);
+  animation: fadeInUp 0.6s ease 0.1s both;
+}
+
+.actions {
+  margin-top: var(--space-xl);
+  text-align: center;
+  animation: fadeInUp 0.4s ease forwards;
+}
+
+/* ===== Related Conversions ===== */
+.related {
+  margin-top: var(--space-3xl);
+  text-align: center;
+  animation: fadeInUp 0.6s ease 0.2s both;
+}
+
+.relatedTitle {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: var(--space-xl);
+}
+
+.relatedGrid {
+  display: flex;
+  gap: var(--space-md);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.relatedCard {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 0.65rem 1.2rem;
+  background: var(--bg-card);
+  border: var(--glass-border);
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  transition: all var(--transition-base);
+}
+
+.relatedCard:hover {
+  background: var(--bg-card-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+.relatedFrom {
+  font-weight: 600;
+  font-size: 0.82rem;
+  color: var(--accent-purple);
+}
+
+.relatedArrow {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+
+.relatedTo {
+  font-weight: 600;
+  font-size: 0.82rem;
+  color: var(--accent-cyan);
+}

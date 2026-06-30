@@ -1,0 +1,108 @@
+/* ===== Hero ===== */
+.hero {
+  text-align: center;
+  margin-bottom: var(--space-2xl);
+  animation: fadeInUp 0.5s ease forwards;
+}
+
+.iconBadge {
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto var(--space-lg);
+  border-radius: var(--radius-lg);
+  background: var(--gradient-warm);
+  font-size: 1.8rem;
+}
+
+.headline {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 800;
+  background: linear-gradient(135deg, #ec4899, #f59e0b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: var(--space-md);
+  letter-spacing: -0.02em;
+}
+
+.subtext {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  max-width: 550px;
+  margin: 0 auto;
+}
+
+/* ===== Tool Card ===== */
+.toolCard {
+  max-width: 600px;
+  margin: 0 auto;
+  background: var(--bg-card);
+  backdrop-filter: blur(var(--glass-blur));
+  border: var(--glass-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-2xl);
+  animation: fadeInUp 0.6s ease 0.1s both;
+}
+
+.formArea {
+  margin-top: var(--space-xl);
+  animation: fadeInUp 0.4s ease forwards;
+}
+
+.pageRange {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md);
+}
+
+/* ===== Other Tools ===== */
+.otherTools {
+  margin-top: var(--space-3xl);
+  text-align: center;
+  animation: fadeInUp 0.6s ease 0.2s both;
+}
+
+.otherTitle {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: var(--space-xl);
+}
+
+.otherGrid {
+  display: flex;
+  gap: var(--space-md);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.otherCard {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 0.75rem 1.3rem;
+  background: var(--bg-card);
+  border: var(--glass-border);
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  transition: all var(--transition-base);
+}
+
+.otherCard:hover {
+  background: var(--bg-card-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+.otherIcon {
+  font-size: 1rem;
+}
+
+.otherLabel {
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}

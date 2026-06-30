@@ -1,0 +1,40 @@
+.toolCard {
+  max-width: 700px;
+  margin: 0 auto;
+  background: var(--bg-card);
+  backdrop-filter: blur(var(--glass-blur));
+  border: var(--glass-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-2xl);
+  animation: fadeInUp 0.5s ease forwards;
+}
+
+.toolDesc {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  text-align: center;
+  margin-bottom: var(--space-sm);
+}
+
+.supportedBadge {
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  background: var(--bg-secondary);
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-full);
+  margin: 0 auto var(--space-xl);
+  display: flex;
+  justify-content: center;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: var(--space-xl);
+}
+
+.actions {
+  margin-top: var(--space-xl);
+  text-align: center;
+  animation: fadeInUp 0.4s ease forwards;
+}

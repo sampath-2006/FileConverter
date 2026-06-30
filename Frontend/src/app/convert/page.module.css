@@ -1,0 +1,15 @@
+.converterCard {
+  max-width: 640px;
+  margin: 0 auto;
+  background: var(--bg-card);
+  backdrop-filter: blur(var(--glass-blur));
+  border: var(--glass-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-2xl);
+  animation: fadeInUp 0.5s ease forwards;
+}
+
+.options {
+  margin-top: var(--space-xl);
+  animation: fadeInUp 0.4s ease forwards;
+}

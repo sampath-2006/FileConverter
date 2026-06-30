@@ -1,0 +1,138 @@
+.dropzone {
+  border: 2px dashed rgba(139, 92, 246, 0.25);
+  border-radius: var(--radius-lg);
+  padding: 3rem 2rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  background: var(--bg-card);
+  position: relative;
+  overflow: hidden;
+}
+
+.dropzone::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(139, 92, 246, 0.05) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity var(--transition-base);
+}
+
+.dropzone:hover {
+  border-color: rgba(139, 92, 246, 0.4);
+  background: var(--bg-card-hover);
+}
+
+.dropzone:hover::before {
+  opacity: 1;
+}
+
+.dragging {
+  border-color: var(--accent-purple);
+  background: rgba(139, 92, 246, 0.08);
+  box-shadow: 0 0 40px rgba(139, 92, 246, 0.15);
+  transform: scale(1.01);
+}
+
+.hasFiles {
+  border-color: rgba(16, 185, 129, 0.4);
+  border-style: solid;
+}
+
+.hiddenInput {
+  display: none;
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+}
+
+.icon {
+  width: 56px;
+  height: 56px;
+  margin: 0 auto var(--space-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-lg);
+  background: var(--gradient-primary);
+  font-size: 1.4rem;
+  color: white;
+  transition: transform var(--transition-base);
+}
+
+.dropzone:hover .icon {
+  transform: translateY(-4px);
+}
+
+.hasFiles .icon {
+  background: linear-gradient(135deg, #10b981, #059669);
+}
+
+.title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.3rem;
+}
+
+.subtitle {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* File List */
+.fileList {
+  margin-top: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.fileItem {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: 0.6rem 1rem;
+  background: var(--bg-card);
+  border: var(--glass-border);
+  border-radius: var(--radius-sm);
+  animation: fadeInUp 0.3s ease forwards;
+}
+
+.fileName {
+  flex: 1;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.fileSize {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.removeBtn {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-full);
+  background: rgba(239, 68, 68, 0.1);
+  color: var(--accent-red);
+  font-size: 0.7rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.removeBtn:hover {
+  background: rgba(239, 68, 68, 0.25);
+}
