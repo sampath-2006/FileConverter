@@ -16,3 +16,4 @@ groq
 langchain
 langchain-groq
 langchain-community
+PyJWT

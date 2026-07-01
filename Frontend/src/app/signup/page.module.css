@@ -1,0 +1,66 @@
+.container {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-xl);
+}
+
+.card {
+  width: 100%;
+  max-width: 440px;
+  background: var(--bg-card);
+  border: var(--glass-border);
+  border-radius: var(--radius-2xl);
+  padding: var(--space-2xl);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  animation: fadeInUp 0.5s ease both;
+}
+
+.title {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: var(--space-xs);
+  text-align: center;
+}
+
+.subtitle {
+  color: var(--text-secondary);
+  text-align: center;
+  margin-bottom: var(--space-2xl);
+  font-size: 0.95rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  margin-bottom: var(--space-xl);
+}
+
+.submitBtn {
+  margin-top: var(--space-md);
+  width: 100%;
+  padding: 0.8rem;
+  font-size: 1rem;
+}
+
+.footer {
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: var(--space-xl);
+}
+
+.link {
+  color: #3b82f6;
+  text-decoration: none;
+  font-weight: 600;
+  margin-left: 0.3rem;
+}
+
+.link:hover {
+  text-decoration: underline;
+}

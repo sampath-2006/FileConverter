@@ -1,28 +1,224 @@
-.toolCard {
-  max-width: 640px;
-  margin: 0 auto;
-  background: var(--bg-card);
-  backdrop-filter: blur(var(--glass-blur));
-  border: var(--glass-border);
-  border-radius: var(--radius-xl);
-  padding: var(--space-2xl);
-  animation: fadeInUp 0.5s ease forwards;
+/* ═══════════════════════════════════════════════════════════════
+   PDF HUB — Premium Grid UI
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── Floating Background Orbs ───────────────────────────────── */
+.bgOrbs {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  overflow: hidden;
 }
 
-.toolDesc {
-  color: var(--text-secondary);
-  font-size: 0.9rem;
+.orb1, .orb2, .orb3 {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.15;
+}
+
+.orb1 {
+  width: 500px;
+  height: 500px;
+  background: #ef4444;
+  top: -10%;
+  right: -5%;
+  animation: orbFloat 20s ease-in-out infinite alternate;
+}
+
+.orb2 {
+  width: 400px;
+  height: 400px;
+  background: #8b5cf6;
+  bottom: 10%;
+  left: -8%;
+  animation: orbFloat 15s ease-in-out 3s infinite alternate-reverse;
+}
+
+.orb3 {
+  width: 350px;
+  height: 350px;
+  background: #3b82f6;
+  top: 50%;
+  left: 50%;
+  animation: orbFloat 18s ease-in-out 6s infinite alternate;
+}
+
+@keyframes orbFloat {
+  0%   { transform: translate(0, 0) scale(1); }
+  50%  { transform: translate(30px, -40px) scale(1.15); }
+  100% { transform: translate(-20px, 20px) scale(0.95); }
+}
+
+/* ── Hero ───────────────────────────────────────────────────── */
+.hero {
   text-align: center;
-  margin-bottom: var(--space-xl);
+  margin-bottom: var(--space-3xl);
+  animation: fadeInUp 0.6s ease forwards;
+  position: relative;
 }
 
-.formArea {
-  margin-top: var(--space-xl);
-  animation: fadeInUp 0.4s ease forwards;
+.badge {
+  display: inline-block;
+  padding: 0.4rem 1.2rem;
+  border-radius: var(--radius-full);
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #f87171;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  margin-bottom: var(--space-lg);
+  animation: pulse 3s ease-in-out infinite;
 }
 
-.pageRange {
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.2); }
+  50%      { box-shadow: 0 0 20px 4px rgba(239, 68, 68, 0.15); }
+}
+
+.headline {
+  font-size: clamp(2.2rem, 5vw, 3.5rem);
+  font-weight: 800;
+  background: linear-gradient(135deg, #ffffff 0%, #94a3b8 50%, #ffffff 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: var(--space-md);
+  letter-spacing: -0.03em;
+  animation: shimmer 6s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0%   { background-position: 200% center; }
+  100% { background-position: -200% center; }
+}
+
+.subtext {
+  color: var(--text-secondary);
+  font-size: 1.15rem;
+  max-width: 650px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+/* ── Grid Layout ────────────────────────────────────────────── */
+.grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--space-md);
+  grid-template-columns: repeat(1, 1fr);
+  gap: var(--space-lg);
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+@media (min-width: 640px)  { .grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .grid { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 1280px) { .grid { grid-template-columns: repeat(4, 1fr); } }
+
+/* ── Card Styling ───────────────────────────────────────────── */
+.card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: var(--radius-xl);
+  padding: var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  overflow: hidden;
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: cardEntrance 0.5s ease both;
+  animation-delay: var(--card-delay);
+}
+
+@keyframes cardEntrance {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Hidden glow layer */
+.cardGlow {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(circle at 50% 0%, var(--icon-bg), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  border-color: var(--icon-color);
+  box-shadow:
+    0 0 30px -5px var(--icon-bg),
+    0 20px 40px -15px rgba(0, 0, 0, 0.3);
+}
+
+.card:hover .cardGlow {
+  opacity: 1;
+}
+
+/* ── Icon ───────────────────────────────────────────────────── */
+.iconContainer {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  margin-bottom: var(--space-lg);
+  background-color: var(--icon-bg);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.3s ease;
+}
+
+.card:hover .iconContainer {
+  transform: scale(1.12) rotate(-3deg);
+  border-color: var(--icon-color);
+  box-shadow: 0 0 20px var(--icon-bg);
+}
+
+/* ── Card Content ───────────────────────────────────────────── */
+.cardContent {
+  flex: 1;
+}
+
+.cardTitle {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.4rem;
+}
+
+.cardDesc {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.55;
+}
+
+/* ── CTA text ───────────────────────────────────────────────── */
+.cardAction {
+  margin-top: var(--space-md);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--icon-color);
+  opacity: 0;
+  transform: translateY(4px);
+  transition: all 0.3s ease;
+}
+
+.card:hover .cardAction {
+  opacity: 1;
+  transform: translateY(0);
 }

@@ -81,3 +81,108 @@ def compress_pdf(input_path, output_path, password=None):
         return True, "PDF compression successful"
     except Exception as e:
         return False, str(e)
+
+
+def protect_pdf(input_path, output_path, password):
+    """Encrypts a PDF with AES-256 using PyMuPDF."""
+    try:
+        doc = fitz.open(input_path)
+        doc.save(
+            output_path, 
+            encryption=fitz.PDF_ENCRYPT_AES_256,
+            owner_pw=password,
+            user_pw=password
+        )
+        doc.close()
+        return True, "PDF protection successful"
+    except Exception as e:
+        return False, str(e)
+
+
+def unlock_pdf(input_path, output_path, password):
+    """Decrypts a PDF and saves a clean copy."""
+    try:
+        doc = fitz.open(input_path)
+        if doc.needs_pass:
+            if not doc.authenticate(password):
+                doc.close()
+                return False, "Incorrect password."
+        # Saving without encryption flags produces a decrypted PDF
+        doc.save(output_path)
+        doc.close()
+        return True, "PDF unlocked successfully"
+    except Exception as e:
+        return False, str(e)
+
+
+def redact_pdf(input_path, output_path, words_to_redact, password=None):
+    """Searches for exact text matches and applies blackout redactions."""
+    try:
+        doc = fitz.open(input_path)
+        
+        if doc.needs_pass:
+            if not password:
+                doc.close()
+                return False, "Password required to process this file."
+            if not doc.authenticate(password):
+                doc.close()
+                return False, "Incorrect password."
+                
+        word_list = [w.strip() for w in words_to_redact.split(',') if w.strip()]
+        
+        for page in doc:
+            for word in word_list:
+                # Search for the word on this page
+                rect_list = page.search_for(word)
+                for rect in rect_list:
+                    # Add a blackout redaction annotation
+                    page.add_redact_annot(rect, fill=(0, 0, 0))
+            # Apply all redactions on the page permanently
+            page.apply_redactions()
+            
+        doc.save(output_path, deflate=True)
+        doc.close()
+        return True, "PDF redaction successful"
+    except Exception as e:
+        return False, str(e)
+
+
+def sign_pdf(pdf_path, signature_image_path, output_path, password=None):
+    """Stamps a signature image on the bottom right of the last page."""
+    try:
+        doc = fitz.open(pdf_path)
+        
+        if doc.needs_pass:
+            if not password:
+                doc.close()
+                return False, "Password required to process this PDF."
+            if not doc.authenticate(password):
+                doc.close()
+                return False, "Incorrect password."
+                
+        # Get the last page
+        last_page = doc[-1]
+        page_rect = last_page.rect
+        
+        # Define a rectangle at the bottom right corner for the signature
+        # Standard signature size roughly 150x50 pts
+        sig_width = 150
+        sig_height = 50
+        margin = 30
+        
+        rect = fitz.Rect(
+            page_rect.width - sig_width - margin,
+            page_rect.height - sig_height - margin,
+            page_rect.width - margin,
+            page_rect.height - margin
+        )
+        
+        # Insert the image
+        last_page.insert_image(rect, filename=signature_image_path)
+        
+        doc.save(output_path, deflate=True)
+        doc.close()
+        return True, "PDF signing successful"
+    except Exception as e:
+        return False, str(e)
+

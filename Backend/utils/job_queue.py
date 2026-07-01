@@ -16,11 +16,11 @@ def run_conversion_job(job_id, upload_path, output_path, target_format):
         update_job_status(job_id, 'processing')
         
         # Run the heavy conversion
-        success, message = master_convert(upload_path, output_path, target_format)
+        success, message, final_output_path = master_convert(upload_path, output_path, target_format)
         
         if success:
-            # Mark complete and save the output path
-            update_job_status(job_id, 'completed', output_path=output_path)
+            # Mark complete and save the actual final output path (could be a .zip now)
+            update_job_status(job_id, 'completed', output_path=final_output_path)
         else:
             # Mark failed
             update_job_status(job_id, 'failed', error_message=message)
@@ -37,7 +37,7 @@ def run_pdf_job(job_id, operation, input_paths, output_path, **kwargs):
     operation: 'merge', 'split', 'compress'
     input_paths: list of paths (for merge) or single path string (for others)
     """
-    from services.pdf_toolkit_service import merge_pdfs, split_pdf, compress_pdf
+    from services.pdf_toolkit_service import merge_pdfs, split_pdf, compress_pdf, protect_pdf, unlock_pdf, redact_pdf, sign_pdf
     
     try:
         update_job_status(job_id, 'processing')
@@ -53,6 +53,19 @@ def run_pdf_job(job_id, operation, input_paths, output_path, **kwargs):
         elif operation == 'compress':
             success, message = compress_pdf(input_paths, output_path, password=password)
             cleanup_list = [input_paths]
+        elif operation == 'protect':
+            success, message = protect_pdf(input_paths, output_path, password)
+            cleanup_list = [input_paths]
+        elif operation == 'unlock':
+            success, message = unlock_pdf(input_paths, output_path, password)
+            cleanup_list = [input_paths]
+        elif operation == 'redact':
+            success, message = redact_pdf(input_paths, output_path, kwargs.get('words'), password=password)
+            cleanup_list = [input_paths]
+        elif operation == 'sign':
+            # input_paths should be [pdf_path, image_path] for sign
+            success, message = sign_pdf(input_paths[0], input_paths[1], output_path, password=password)
+            cleanup_list = input_paths
         else:
             success, message = False, "Unknown PDF operation"
             cleanup_list = input_paths if isinstance(input_paths, list) else [input_paths]

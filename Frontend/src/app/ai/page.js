@@ -64,7 +64,7 @@ export default function AiPage() {
     <section className="section">
       <div className="page-header">
         <h1>AI Tools</h1>
-        <p>Analyze your documents with Llama 3.1 — powered by LangChain &amp; Groq.</p>
+        <p>Analyze your documents instantly with advanced AI models.</p>
       </div>
 
       {/* Tabs */}

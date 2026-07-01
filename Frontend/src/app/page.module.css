@@ -249,15 +249,44 @@
 .popularText {
   display: flex;
   flex-direction: column;
+  gap: 0.15rem;
 }
 
 .popularTitle {
-  font-size: 0.95rem;
   font-weight: 600;
   color: var(--text-primary);
 }
 
 .popularSubtitle {
-  font-size: 0.75rem;
-  color: var(--text-muted);
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.developerCard {
+  padding: var(--space-2xl);
+  border-radius: var(--radius-2xl);
+  max-width: 800px;
+  margin: 0 auto;
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(6, 182, 212, 0.05));
+  box-shadow: 0 10px 40px rgba(139, 92, 246, 0.1);
+}
+
+.developerContent h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+}
+
+.developerContent p {
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.developerCta {
+  margin-top: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
 }

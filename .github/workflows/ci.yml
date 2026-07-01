@@ -1,0 +1,62 @@
+name: FileForge CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  backend-tests:
+    name: Backend Tests (Python)
+    runs-on: ubuntu-latest
+    
+    defaults:
+      run:
+        working-directory: ./Backend
+
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python 3.10
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.10"
+        
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+        pip install pytest pytest-cov pytest-mock
+        
+    - name: Run pytest
+      env:
+        PYTHONPATH: .
+      run: |
+        pytest --cov=services --cov=routes --cov=utils --cov-report=term-missing
+
+  frontend-build:
+    name: Frontend Build (Node.js)
+    runs-on: ubuntu-latest
+    
+    defaults:
+      run:
+        working-directory: ./Frontend
+
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Node.js 18
+      uses: actions/setup-node@v3
+      with:
+        node-version: "18"
+        cache: 'npm'
+        cache-dependency-path: './Frontend/package-lock.json'
+        
+    - name: Install dependencies
+      run: npm ci || npm install
+      
+    - name: Build Next.js App
+      run: npm run build
+      env:
+        NEXT_TELEMETRY_DISABLED: 1

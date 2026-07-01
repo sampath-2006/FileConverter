@@ -12,9 +12,9 @@ def convert_image(input_path, output_path, target_format):
                 img = img.convert('RGB')
             save_format = 'JPEG' if target_format.upper() == 'JPG' else target_format.upper()
             img.save(output_path, format=save_format)
-            return True, "Conversion successful"
+            return True, "Conversion successful", output_path
     except Exception as e:
-        return False, str(e)
+        return False, str(e), output_path
 
 def master_convert(input_path, output_path, target_format):
     """

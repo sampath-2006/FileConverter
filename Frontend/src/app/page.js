@@ -20,7 +20,7 @@ const features = [
   {
     icon: '🧠',
     title: 'AI Analysis',
-    description: 'Summarize documents and extract key data using Llama 3.1 — powered by LangChain.',
+    description: 'Summarize documents and extract key data instantly using advanced AI.',
     href: '/ai',
     gradient: 'linear-gradient(135deg, #06b6d4, #10b981)',
   },
@@ -29,37 +29,36 @@ const features = [
 const stats = [
   { value: '50+', label: 'Formats Supported' },
   { value: '200MB', label: 'Max File Size' },
-  { value: 'AI', label: 'Llama 3.1 Powered' },
+  { value: 'AI', label: 'AI Powered' },
   { value: '100%', label: 'Privacy Secured' },
 ];
 
 export default function HomePage() {
   return (
     <>
-      {/* Hero Section */}
-      <section className={styles.hero}>
-        <div className={styles.heroGlow} />
-        <div className={styles.heroContent}>
-          <div className={styles.badge}>
-            <span>✦</span> AI-Powered File Platform
-          </div>
-          <h1 className={styles.heroTitle}>
-            Convert. Compress.
-            <br />
-            <span className={styles.heroGradient}>Analyze with AI.</span>
-          </h1>
-          <p className={styles.heroSubtitle}>
-            The premium file conversion platform that transforms your documents,
-            images, and videos — then lets AI summarize them in seconds.
-          </p>
-          <div className={styles.heroCta}>
-            <Link href="/convert" className="btn btn-primary" id="hero-cta-convert">
-              Start Converting →
+
+
+      {/* Popular Conversions (SEO) */}
+      <section className="section" style={{ paddingTop: '2rem' }}>
+        <div className={styles.sectionHeader}>
+          <h2 className={styles.sectionTitle}>Popular Tools</h2>
+          <p className={styles.sectionSubtitle}>Quick links to our most used converters.</p>
+        </div>
+
+        <div className={styles.popularGrid}>
+          {POPULAR_CONVERSIONS.map((conv) => (
+            <Link
+              key={conv.slug}
+              href={`/convert/${conv.slug}`}
+              className={styles.popularCard}
+            >
+              <span className={styles.popularIcon}>{conv.icon}</span>
+              <div className={styles.popularText}>
+                <span className={styles.popularTitle}>{conv.from} to {conv.to}</span>
+                <span className={styles.popularSubtitle}>Convert {conv.from} to {conv.to} format</span>
+              </div>
             </Link>
-            <Link href="/ai" className="btn btn-secondary" id="hero-cta-ai">
-              Try AI Tools
-            </Link>
-          </div>
+          ))}
         </div>
       </section>
 
@@ -106,29 +105,37 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Popular Conversions (SEO) */}
-      <section className="section" style={{ paddingTop: 0 }}>
+      {/* Developer Options */}
+      <section className="section">
         <div className={styles.sectionHeader}>
-          <h2 className={styles.sectionTitle}>Popular Tools</h2>
-          <p className={styles.sectionSubtitle}>Quick links to our most used converters.</p>
+          <h2 className={styles.sectionTitle}>Developer Options</h2>
+          <p className={styles.sectionSubtitle}>
+            Integrate our powerful conversion and AI engine directly into your own applications.
+          </p>
         </div>
-
-        <div className={styles.popularGrid}>
-          {POPULAR_CONVERSIONS.map((conv) => (
-            <Link
-              key={conv.slug}
-              href={`/convert/${conv.slug}`}
-              className={styles.popularCard}
-            >
-              <span className={styles.popularIcon}>{conv.icon}</span>
-              <div className={styles.popularText}>
-                <span className={styles.popularTitle}>{conv.from} to {conv.to}</span>
-                <span className={styles.popularSubtitle}>Convert {conv.from} to {conv.to} format</span>
-              </div>
-            </Link>
-          ))}
+        
+        <div className={`${styles.developerCard} glass-card`}>
+          <div className={styles.developerContent}>
+            <h3>Build with FileForge</h3>
+            <p>
+              Get a free API key with up to 5 conversions per day. 
+              Access all image, video, audio, and PDF endpoints programmatically.
+            </p>
+            <ul style={{ listStyle: 'none', padding: 0, margin: '1rem 0', display: 'flex', flexDirection: 'column', gap: '0.5rem', color: 'var(--text-secondary)' }}>
+              <li>✅ Simple RESTful API</li>
+              <li>✅ Secure JWT Authentication</li>
+              <li>✅ Unlimited Free Sandbox Mode</li>
+            </ul>
+            <div className={styles.developerCta}>
+              <Link href="/signup" className="btn btn-primary">Sign Up Free</Link>
+              <Link href="/login" className="btn btn-secondary" style={{ marginLeft: '1rem' }}>Log In</Link>
+              <Link href="/developer" className="btn" style={{ marginLeft: '1rem', background: 'rgba(255,255,255,0.05)' }}>Go to Dashboard</Link>
+            </div>
+          </div>
         </div>
       </section>
+
+
     </>
   );
 }

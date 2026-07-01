@@ -19,12 +19,17 @@ def create_app():
     app.config.from_object(Config)
     
     # Enable CORS for frontend integration
-    CORS(app)
+    CORS(app, expose_headers=["Content-Disposition"])
+    
+    from routes.developer_routes import developer_bp
+    from routes.auth_routes import auth_bp
     
     # Register blueprints
     app.register_blueprint(conversion_bp, url_prefix='/api/v1')
     app.register_blueprint(pdf_bp, url_prefix='/api/v1/pdf')
     app.register_blueprint(ai_bp, url_prefix='/api/v1/ai')
+    app.register_blueprint(developer_bp, url_prefix='/api/v1/developer')
+    app.register_blueprint(auth_bp, url_prefix='/api/v1/auth')
     
     # Global error handler for file size limit exceeded
     @app.errorhandler(413)

@@ -9,8 +9,9 @@ class Config:
     # Security: Max upload size increased to 200MB for Video/Audio
     MAX_CONTENT_LENGTH = 200 * 1024 * 1024
     
-    # API Keys
+    # API Keys & Secrets
     GROQ_API_KEY = os.environ.get("GROQ_API_KEY")
+    JWT_SECRET = os.environ.get("JWT_SECRET", "super-secret-dev-key-change-in-prod")
     
     # Base directory
     BASE_DIR = os.path.abspath(os.path.dirname(__file__))

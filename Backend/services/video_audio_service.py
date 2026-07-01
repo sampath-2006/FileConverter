@@ -31,19 +31,19 @@ def convert_media(input_path, output_path, target_format):
                 clip.write_videofile(output_path)
                 
             clip.close()
-            return True, "Video conversion successful"
+            return True, "Video conversion successful", output_path
             
         elif ext in audio_formats:
             if target_format in video_formats:
-                return False, "Cannot convert Audio to Video without an image source."
+                return False, "Cannot convert Audio to Video without an image source.", output_path
                 
             clip = AudioFileClip(input_path)
             clip.write_audiofile(output_path)
             clip.close()
-            return True, "Audio conversion successful"
+            return True, "Audio conversion successful", output_path
             
         else:
-            return False, f"Unsupported media format: {ext}"
+            return False, f"Unsupported media format: {ext}", output_path
             
     except Exception as e:
-        return False, str(e)
+        return False, str(e), output_path

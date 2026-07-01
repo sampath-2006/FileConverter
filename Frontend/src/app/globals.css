@@ -62,6 +62,34 @@
   --transition-slow: 0.5s ease;
 }
 
+/* ===== Light Theme Overrides ===== */
+[data-theme="light"] {
+  /* Background */
+  --bg-primary: #f8fafc;
+  --bg-secondary: #f1f5f9;
+  --bg-card: rgba(255, 255, 255, 0.7);
+  --bg-card-hover: rgba(255, 255, 255, 0.95);
+  --bg-glass: rgba(255, 255, 255, 0.5);
+
+  /* Text */
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #94a3b8;
+
+  /* Glass */
+  --glass-border: 1px solid rgba(0, 0, 0, 0.05);
+
+  /* Gradients */
+  --gradient-hero: linear-gradient(160deg, #f8fafc 0%, #e0e7ff 40%, #cffafe 70%, #f8fafc 100%);
+  --gradient-glass-border: linear-gradient(135deg, rgba(0,0,0,0.1), rgba(0,0,0,0.02));
+
+  /* Shadows */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.12);
+}
+
+
 /* ===== Global Reset ===== */
 *,
 *::before,
