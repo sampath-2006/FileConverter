@@ -10,10 +10,6 @@ jobs:
   backend-tests:
     name: Backend Tests (Python)
     runs-on: ubuntu-latest
-    
-    defaults:
-      run:
-        working-directory: ./Backend
 
     steps:
     - uses: actions/checkout@v4
@@ -26,40 +22,37 @@ jobs:
     - name: Install system dependencies
       run: sudo apt-get update && sudo apt-get install -y poppler-utils
         
-    - name: Install dependencies
+    - name: Install Python dependencies
+      working-directory: ./Backend
       run: |
         python -m pip install --upgrade pip
-        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+        pip install -r requirements.txt
         pip install pytest pytest-cov pytest-mock
         
     - name: Run pytest
+      working-directory: ./Backend
       env:
         PYTHONPATH: .
-      run: |
-        pytest --cov=services --cov=routes --cov=utils --cov-report=term-missing
+      run: pytest --cov=services --cov=routes --cov=utils --cov-report=term-missing
 
   frontend-build:
     name: Frontend Build (Node.js)
     runs-on: ubuntu-latest
-    
-    defaults:
-      run:
-        working-directory: ./Frontend
 
     steps:
     - uses: actions/checkout@v4
     
-    - name: Set up Node.js 20
+    - name: Set up Node.js 22
       uses: actions/setup-node@v4
       with:
-        node-version: "20"
-        cache: 'npm'
-        cache-dependency-path: './Frontend/package-lock.json'
+        node-version: "22"
         
     - name: Install dependencies
-      run: npm ci || npm install
+      working-directory: ./Frontend
+      run: npm install --no-audit --no-fund
       
     - name: Build Next.js App
+      working-directory: ./Frontend
       run: npm run build
       env:
         NEXT_TELEMETRY_DISABLED: 1
