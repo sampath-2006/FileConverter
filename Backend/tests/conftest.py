@@ -4,9 +4,15 @@ import tempfile
 import fitz
 from PIL import Image
 from app import create_app
+from utils import db_manager
 
 @pytest.fixture
-def app():
+def app(tmp_path):
+    # Point the database to a fresh temporary file for complete test isolation
+    test_db = str(tmp_path / 'test_jobs.db')
+    db_manager.DB_PATH = test_db
+    db_manager.init_db()
+
     app = create_app()
     app.config.update({
         "TESTING": True,
