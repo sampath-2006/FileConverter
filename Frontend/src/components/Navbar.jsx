@@ -96,7 +96,7 @@ export default function Navbar() {
                   <h4 className={styles.megaMenuTitle}>DEVELOPERS</h4>
                   <ul className={styles.megaMenuLinks}>
                     <li><Link href="/developer" className={styles.megaMenuLink}><span className={styles.megaIcon}>🔑</span> API Dashboard</Link></li>
-                    <li><Link href="/developer" className={styles.megaMenuLink}><span className={styles.megaIcon}>📚</span> API Documentation</Link></li>
+                    <li><Link href="/api-docs" className={styles.megaMenuLink}><span className={styles.megaIcon}>📚</span> API Documentation</Link></li>
                   </ul>
                 </div>
               </div>

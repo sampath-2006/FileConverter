@@ -30,7 +30,7 @@ export default function ProgressTracker({ jobId, downloadName, onComplete, showR
           clearInterval(intervalRef.current);
           if (showResultText) {
             // For AI results, fetch the text content
-            const API_BASE = 'http://127.0.0.1:5000/api/v1';
+            const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:5000/api/v1';
             const res = await fetch(`${API_BASE}/download/${jobId}`);
             const text = await res.text();
             setResultText(text);
