@@ -3,7 +3,7 @@ services:
     name: fileforge-api
     env: docker
     dockerContext: Backend
-    dockerfilePath: Backend/Dockerfile
+    dockerfilePath: ./Dockerfile
     plan: free
     healthCheckPath: /health
     envVars:
