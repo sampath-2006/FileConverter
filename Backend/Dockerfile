@@ -22,5 +22,5 @@ COPY . .
 # Expose port
 EXPOSE 5000
 
-# Start Gunicorn server
-CMD ["gunicorn", "--bind", "0.0.0.0:5000", "--workers", "2", "--timeout", "120", "app:app"]
+# Start Gunicorn server calling the app factory
+CMD ["gunicorn", "--bind", "0.0.0.0:5000", "--workers", "2", "--timeout", "120", "app:create_app()"]
