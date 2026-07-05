@@ -1,4 +1,6 @@
-const API_BASE = 'http://127.0.0.1:5000/api/v1';
+const API_BASE = process.env.NEXT_PUBLIC_API_URL 
+  ? `${process.env.NEXT_PUBLIC_API_URL}/api/v1` 
+  : 'http://127.0.0.1:5000/api/v1';
 
 /**
  * Upload a file for conversion.
