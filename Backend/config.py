@@ -33,7 +33,8 @@ class Config:
     }
     
     # Security: CORS Allowed Origins
-    CORS_ORIGINS = ["http://localhost:3000"]
+    cors_env = os.environ.get("CORS_ORIGINS", "http://localhost:3000")
+    CORS_ORIGINS = [origin.strip() for origin in cors_env.split(",")]
     
     # Create directories if they don't exist
     os.makedirs(UPLOAD_FOLDER, exist_ok=True)

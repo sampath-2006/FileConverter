@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: fileforge-api
+    env: docker
+    dockerContext: Backend
+    dockerfilePath: Backend/Dockerfile
+    plan: free
+    healthCheckPath: /health
+    envVars:
+      - key: GROQ_API_KEY
+        sync: false # You will enter this manually in the Render dashboard
+      - key: JWT_SECRET
+        generateValue: true # Render will securely generate a random string for us
+      - key: CORS_ORIGINS
+        value: "https://file-converter.vercel.app" # Default; you can update this to your actual Vercel URL
