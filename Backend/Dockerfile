@@ -3,7 +3,8 @@ FROM python:3.11-slim
 # Install system dependencies (FFmpeg for video/audio, libgl for images)
 RUN apt-get update && apt-get install -y \
     ffmpeg \
-    libgl1-mesa-glx \
+    libgl1 \
+    libglib2.0-0 \
     poppler-utils \
     && rm -rf /var/lib/apt/lists/*
 
