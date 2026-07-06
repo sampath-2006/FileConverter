@@ -201,6 +201,25 @@
   background-color: #dc2626;
 }
 
+.downloadAppBtn {
+  background-color: transparent;
+  color: #10b981;
+  border: 1px solid #10b981;
+  padding: 0.5rem 1.2rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.downloadAppBtn:hover {
+  background-color: rgba(16, 185, 129, 0.1);
+}
+
 .menuGrid {
   background: none;
   border: none;

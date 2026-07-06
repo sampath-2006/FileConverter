@@ -9,6 +9,7 @@ export default function Navbar() {
   const pathname = usePathname();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [theme, setTheme] = useState('dark');
+  const [isMobileApp, setIsMobileApp] = useState(false);
 
   // Check auth state on load and route changes
   useEffect(() => {
@@ -17,6 +18,10 @@ export default function Navbar() {
     // Sync theme state with html attribute (set by layout.js script)
     const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
     setTheme(currentTheme);
+
+    if (typeof window !== 'undefined' && navigator.userAgent.includes('FileForgeMobileApp')) {
+      setIsMobileApp(true);
+    }
   }, [pathname]);
 
   const toggleTheme = () => {
@@ -92,13 +97,15 @@ export default function Navbar() {
                 </div>
 
                 {/* Column 4: Developers */}
-                <div className={styles.megaMenuColumn}>
-                  <h4 className={styles.megaMenuTitle}>DEVELOPERS</h4>
-                  <ul className={styles.megaMenuLinks}>
-                    <li><Link href="/developer" className={styles.megaMenuLink}><span className={styles.megaIcon}>🔑</span> API Dashboard</Link></li>
-                    <li><Link href="/api-docs" className={styles.megaMenuLink}><span className={styles.megaIcon}>📚</span> API Documentation</Link></li>
-                  </ul>
-                </div>
+                {!isMobileApp && (
+                  <div className={styles.megaMenuColumn}>
+                    <h4 className={styles.megaMenuTitle}>DEVELOPERS</h4>
+                    <ul className={styles.megaMenuLinks}>
+                      <li><Link href="/developer" className={styles.megaMenuLink}><span className={styles.megaIcon}>🔑</span> API Dashboard</Link></li>
+                      <li><Link href="/api-docs" className={styles.megaMenuLink}><span className={styles.megaIcon}>📚</span> API Documentation</Link></li>
+                    </ul>
+                  </div>
+                )}
               </div>
             </div>
             
@@ -116,6 +123,9 @@ export default function Navbar() {
               <Link href="/login" className={styles.loginBtn}>Login</Link>
               <Link href="/signup" className={styles.signupBtn}>Sign up</Link>
             </>
+          )}
+          {!isMobileApp && (
+            <a href="/FileConverter.apk" download className={styles.downloadAppBtn}>Get App</a>
           )}
           <button className={styles.menuGrid} onClick={toggleTheme} title={`Switch to ${theme === 'light' ? 'Dark' : 'Light'} Mode`}>
             {theme === 'light' ? (

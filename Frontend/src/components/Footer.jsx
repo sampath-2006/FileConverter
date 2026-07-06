@@ -33,7 +33,7 @@ export default function Footer() {
           <h4 className={styles.colTitle}>RESOURCES</h4>
           <ul className={styles.linkList}>
             <li><Link href="/download">FileForge Desktop</Link></li>
-            <li><Link href="/mobile">FileForge Mobile</Link></li>
+            <li><a href="/FileConverter.apk" download>Download Android App (.apk)</a></li>
             <li><Link href="/pdf/sign">FileForge Sign</Link></li>
             <li><Link href="/developer">FileForge API</Link></li>
             <li><Link href="/convert/jpg">FileForge IMG</Link></li>
