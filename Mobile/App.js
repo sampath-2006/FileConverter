@@ -26,15 +26,18 @@ export default function App() {
       if (parsedData.type === 'DOWNLOAD') {
         const { filename, url } = parsedData;
         
+        // Clean filename to remove any invalid characters that might break Android filesystem
+        const safeFilename = (filename || "converted_file").replace(/[^a-zA-Z0-9.-]/g, '_');
+
         // Define temporary file path
-        const fileUri = FileSystem.documentDirectory + filename;
+        const fileUri = FileSystem.documentDirectory + safeFilename;
         
         // Download the file natively instead of receiving base64
         const downloadResult = await FileSystem.downloadAsync(url, fileUri);
         
         // Ensure successful download
         if (downloadResult.status !== 200) {
-          throw new Error("Download returned status code: " + downloadResult.status);
+          throw new Error("Server returned status " + downloadResult.status + " for URL: " + url);
         }
 
         // Trigger native share menu so user can save or share it
@@ -46,7 +49,7 @@ export default function App() {
       }
     } catch (e) {
       console.error("Error processing download:", e);
-      Alert.alert("Download Error", "There was an error saving the file.");
+      Alert.alert("Download Error", String(e.message || "Unknown error occurred"));
     }
   };
 
