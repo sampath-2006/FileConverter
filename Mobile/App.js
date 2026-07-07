@@ -14,18 +14,18 @@ export default function App() {
     try {
       const parsedData = JSON.parse(event.nativeEvent.data);
       if (parsedData.type === 'DOWNLOAD') {
-        const { filename, data } = parsedData;
-        
-        // Strip the Base64 metadata prefix (e.g. "data:image/jpeg;base64,")
-        const base64Code = data.split(',')[1];
+        const { filename, url } = parsedData;
         
         // Define temporary file path
         const fileUri = FileSystem.documentDirectory + filename;
         
-        // Save the file to phone storage
-        await FileSystem.writeAsStringAsync(fileUri, base64Code, {
-          encoding: FileSystem.EncodingType.Base64,
-        });
+        // Download the file natively instead of receiving base64
+        const downloadResult = await FileSystem.downloadAsync(url, fileUri);
+        
+        // Ensure successful download
+        if (downloadResult.status !== 200) {
+          throw new Error("Download returned status code: " + downloadResult.status);
+        }
 
         // Trigger native share menu so user can save or share it
         if (await Sharing.isAvailableAsync()) {

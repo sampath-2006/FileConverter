@@ -60,20 +60,16 @@ export async function downloadFile(jobId, filename) {
 
   const blob = await res.blob();
   
-  // If running inside the mobile app wrapper, send the blob to React Native
+  // If running inside the mobile app wrapper, send the URL to React Native
   if (typeof window !== 'undefined' && navigator.userAgent.includes('FileForgeMobileApp')) {
-    const reader = new FileReader();
-    reader.readAsDataURL(blob);
-    reader.onloadend = () => {
-      const base64data = reader.result;
-      if (window.ReactNativeWebView) {
-        window.ReactNativeWebView.postMessage(JSON.stringify({
-          type: 'DOWNLOAD',
-          filename: actualFilename,
-          data: base64data
-        }));
-      }
-    };
+    const downloadUrl = `${API_BASE}/download/${jobId}`;
+    if (window.ReactNativeWebView) {
+      window.ReactNativeWebView.postMessage(JSON.stringify({
+        type: 'DOWNLOAD',
+        filename: actualFilename,
+        url: downloadUrl
+      }));
+    }
     return; // Stop execution so we don't try to use standard browser download
   }
 
