@@ -45,22 +45,6 @@ export async function pollStatus(jobId) {
  * @param {string} [filename]
  */
 export async function downloadFile(jobId, filename) {
-  // If running inside the mobile app wrapper, skip the web fetch entirely
-  // and let the native app download directly from the backend
-  if (typeof window !== 'undefined' && navigator.userAgent.includes('FileForgeMobileApp')) {
-    const downloadUrl = `${API_BASE}/download/${jobId}`;
-    const actualFilename = filename || 'converted-file';
-    if (window.ReactNativeWebView) {
-      window.ReactNativeWebView.postMessage(JSON.stringify({
-        type: 'DOWNLOAD',
-        filename: actualFilename,
-        url: downloadUrl
-      }));
-    }
-    return;
-  }
-
-  // Standard web download
   const res = await fetch(`${API_BASE}/download/${jobId}`);
   if (!res.ok) throw new Error('Download failed');
 

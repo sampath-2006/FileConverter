@@ -1,19 +1,8 @@
 'use client';
-import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import styles from './Footer.module.css';
 
 export default function Footer() {
-  const [isMobileApp, setIsMobileApp] = useState(false);
-
-  useEffect(() => {
-    if (typeof window !== 'undefined' && navigator.userAgent.includes('FileForgeMobileApp')) {
-      setIsMobileApp(true);
-    }
-  }, []);
-
-  if (isMobileApp) return null;
-
   return (
     <footer className={styles.footer}>
       <div className={styles.container}>
